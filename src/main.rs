@@ -96,8 +96,8 @@ fn main() {
         let file_name = String::from(entry.file_name().to_string_lossy());
         let full_path = String::from(entry.path().to_string_lossy());
         // Deduplicate file names.
-        source_files.insert(file_name.clone(), full_path.clone());
-        println!("{}, {}", file_name, full_path);
+        println!("Inserting: `{}`", &file_name);
+        source_files.insert(file_name, full_path);
     }
 
     // Get the absolute path of the destination directory.
