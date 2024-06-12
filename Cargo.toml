@@ -1,0 +1,8 @@
+[package]
+name = "finder"
+version = "0.0.1"
+edition = "2021"
+
+[dependencies]
+clap = { version = "4.5.7", features = ["derive"] }
+walkdir = "2"
