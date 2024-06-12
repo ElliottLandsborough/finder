@@ -1,9 +1,9 @@
 /// The program reads the file list, checks if the source directory and
 /// target directory exist, makes a list of every file in the source
-/// directory recursively, and then copies any file from the source directory
-/// to the target directory if the file is in the file list.
+/// directory recursively, and then copies any file from the source
+/// to the target if the file is in the file list.
 ///
-/// By defauilt, the program will print the files that would be copied.
+/// By default, the program will print the files that would be copied.
 /// To copy the files for real, use the `--disable-dry-run` flag.
 ///
 /// Example usage:
