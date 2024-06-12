@@ -47,7 +47,7 @@ struct Args {
 }
 
 fn main() {
-    // Parse the ocmnad line arguments.
+    // Parse the command line arguments.
     let args = Args::parse();
 
     // Get the path to the file list.
@@ -75,8 +75,8 @@ fn main() {
     // Get the absolute path of the source directory.
     let source_directory = args.source_dir;
     let absolute_source = match path::absolute(source_directory) {
-        Ok(pathbuf) => pathbuf,
-        Err(error) => panic!("ERROR: Problem with file: {:?}", error),
+        Ok(p) => p,
+        Err(e) => panic!("ERROR: Problem with file: {:?}", e),
     };
     let absolute_source_string: String = absolute_source.display().to_string();
 
@@ -108,8 +108,8 @@ fn main() {
     // Get the absolute path of the destination directory.
     let target_directory = args.target_dir;
     let absolute_target = match path::absolute(target_directory) {
-        Ok(pathbuf) => pathbuf,
-        Err(error) => panic!("ERROR: Problem with file: {:?}", error),
+        Ok(p) => p,
+        Err(e) => panic!("ERROR: Problem with file: {:?}", e),
     };
     let absolute_target_string: String = absolute_target.display().to_string();
 
