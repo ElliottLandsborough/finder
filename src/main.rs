@@ -10,19 +10,19 @@
 /// ```
 /// $ cargo run -- --file_list files.txt --source_dir /mnt/a --target_dir /mnt/b
 /// ```
-/// 
+///
 /// Note: This program assumes that the file list, source directory, and target
 /// directory are valid and accessible. If any of these paths do not exist, the
 /// program will print an error message and exit.
-/// 
+///
 /// More information can be found in the command line help message.
 use clap::Parser;
-use std::path::Path;
-use std::path;
-use std::io::{BufRead, BufReader};
-use std::fs::File;
-use std::fs;
 use std::collections::HashMap;
+use std::fs;
+use std::fs::File;
+use std::io::{BufRead, BufReader};
+use std::path;
+use std::path::Path;
 use walkdir::WalkDir;
 
 /// Finder copies files from a list of file names to a destination directory.
@@ -55,14 +55,15 @@ fn main() {
 
     // Stop if the file list does not exist.
     if !Path::new(&file_name_list_path).exists() {
-        println!("ERROR: Path to file list `{}` does not exist", file_name_list_path);
+        println!(
+            "ERROR: Path to file list `{}` does not exist",
+            file_name_list_path
+        );
         return;
     }
 
     // Read the file list.
-    let reader = BufReader::new(
-        File::open(file_name_list_path).expect("ERROR: Cannot open file.")
-    );
+    let reader = BufReader::new(File::open(file_name_list_path).expect("ERROR: Cannot open file."));
 
     // Store the file names in a vector.
     let mut file_names = Vec::new();
@@ -81,7 +82,10 @@ fn main() {
 
     // Stop if the source directory does not exist.
     if !Path::new(&absolute_source).exists() {
-        println!("ERROR: Source path `{}` does not exist", absolute_source_string);
+        println!(
+            "ERROR: Source path `{}` does not exist",
+            absolute_source_string
+        );
         return;
     }
 
@@ -90,9 +94,10 @@ fn main() {
     let mut source_files = HashMap::new();
 
     for entry in WalkDir::new(absolute_source)
-            .into_iter()
-            .filter_map(Result::ok)
-            .filter(|e| !e.file_type().is_dir()) {
+        .into_iter()
+        .filter_map(Result::ok)
+        .filter(|e| !e.file_type().is_dir())
+    {
         let file_name = String::from(entry.file_name().to_string_lossy());
         let full_path = String::from(entry.path().to_string_lossy());
         // Deduplicate file names.
@@ -110,13 +115,19 @@ fn main() {
 
     // Stop if the destination directory does not exist.
     if !Path::new(&absolute_target).exists() {
-        println!("ERROR: Target path `{}` does not exist", absolute_target_string);
+        println!(
+            "ERROR: Target path `{}` does not exist",
+            absolute_target_string
+        );
         return;
     }
 
     // Stop if the destination directory is not empty.
     if absolute_target.read_dir().unwrap().next().is_some() {
-        println!("ERROR: Target path `{}` is not empty", absolute_target_string);
+        println!(
+            "ERROR: Target path `{}` is not empty",
+            absolute_target_string
+        );
         return;
     }
 
